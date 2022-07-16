@@ -1,0 +1,2 @@
+public class OperatorDemo05 {
+}
