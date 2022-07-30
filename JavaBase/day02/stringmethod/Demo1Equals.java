@@ -12,5 +12,6 @@ public class Demo1Equals {
 		String s3 = "abc";
 		System.out.println(s1 == s3);
 		System.out.println(s1.equals(s2));
+		System.out.println(s1.equalsIgnoreCase(s2));
 	}
 }
