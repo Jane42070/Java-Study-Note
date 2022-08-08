@@ -1,7 +1,6 @@
 package JavaBase.day03.list.StudentManageSystem;
 
 import JavaBase.day03.list.StudentManageSystem.domain.Student;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -154,7 +153,7 @@ public class ManageArrayList {
         Scanner sc = new Scanner(System.in);
         System.out.println("创建学生信息：");
         String number;
-        while (true) {
+        do {
             while (true) {
                 System.out.println("输入学号：");
                 number = sc.next();
@@ -173,10 +172,7 @@ public class ManageArrayList {
 
             students.add(new Student(number, name, age, birth));
             System.out.println("继续创建？（1/0）");
-            if (sc.nextInt() == 0) {
-                break;
-            }
-        }
+        } while (sc.nextInt() != 0);
     }
 
     public static int getIndex(ArrayList<Student> students, String number) {
