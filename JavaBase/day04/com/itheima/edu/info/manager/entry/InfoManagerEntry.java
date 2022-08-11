@@ -1,6 +1,8 @@
 package JavaBase.day04.com.itheima.edu.info.manager.entry;
 
 import JavaBase.day04.com.itheima.edu.info.manager.controller.StudentController;
+import JavaBase.day04.com.itheima.edu.info.manager.controller.TeacherController;
+
 import java.util.Scanner;
 
 public class InfoManagerEntry {
@@ -19,7 +21,12 @@ public class InfoManagerEntry {
                     StudentController studentController = new StudentController();
                     studentController.start();
                 }
-                case 2 -> System.out.println("老师管理");
+                case 2 -> {
+                    // System.out.println("老师管理");
+                    // 开启老师管理系统
+                    TeacherController teacherController = new TeacherController();
+                    teacherController.start();
+                }
                 case 3 -> {
                     System.out.println("感谢您的使用");
                     // 退出当前正在运行的JVM虚拟机
