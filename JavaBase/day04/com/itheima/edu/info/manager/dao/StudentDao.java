@@ -6,6 +6,15 @@ public class StudentDao {
     // 创建学生对象数组
     private static Student[] students = new Student[5];
 
+    static {
+        Student stu1 = new Student("2018211922", "张三", 22, "20000112");
+        Student stu2 = new Student("2018211923", "李四", 22, "20000624");
+        Student stu3 = new Student("2018211921", "蹇棋林", 22, "20000420");
+        students[0] = stu1;
+        students[1] = stu2;
+        students[2] = stu3;
+    }
+
     public boolean addStudent(Student stu) {
         // 添加学生到数组
         int index = -1;
