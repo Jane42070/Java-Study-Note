@@ -5,7 +5,7 @@ import JavaBase.day04.com.itheima.edu.info.manager.service.StudentService;
 
 import java.util.Scanner;
 
-public class StudentController {
+public class OtherStudentController {
     private StudentService studentService = new StudentService();
     private Scanner sc = new Scanner(System.in);
 
@@ -132,11 +132,7 @@ public class StudentController {
         int age = sc.nextInt();
         System.out.println("请输入生日");
         String birth = sc.next();
-        Student stu = new Student();
-        stu.setId(id);
-        stu.setName(name);
-        stu.setAge(age);
-        stu.setBirth(birth);
+        Student stu = new Student(id, name, age, birth);
         return stu;
     }
 }

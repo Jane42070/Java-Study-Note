@@ -114,7 +114,11 @@ public class TeacherController {
         age = sc.nextInt();
         System.out.println("请输入生日：");
         birth = sc.next();
-        Teacher teacher = new Teacher(id, name, age, birth);
+        Teacher teacher = new Teacher();
+        teacher.setId(id);
+        teacher.setName(name);
+        teacher.setAge(age);
+        teacher.setBirth(birth);
         return teacher;
     }
 }
