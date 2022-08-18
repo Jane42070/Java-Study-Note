@@ -1,11 +1,16 @@
 package JavaBase.day04.com.itheima.edu.info.manager.service;
 
+import JavaBase.day04.com.itheima.edu.info.manager.dao.BaseStudentDao;
+import JavaBase.day04.com.itheima.edu.info.manager.dao.OtherStudentDao;
 import JavaBase.day04.com.itheima.edu.info.manager.dao.StudentDao;
 import JavaBase.day04.com.itheima.edu.info.manager.domain.Student;
+import JavaBase.day04.com.itheima.edu.info.manager.factory.StudentDaoFactory;
 
 public class StudentService {
     // 创建库管对象 StudentDao
-    private StudentDao studentDao = new StudentDao();
+    // private OtherStudentDao studentDao = new OtherStudentDao();
+    // 通过学生库管工厂类，获取库管对象
+    private BaseStudentDao studentDao = StudentDaoFactory.getStudentDao();
 
     public boolean addStudent(Student stu) {
         // 传入接收的学生对象
