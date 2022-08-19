@@ -1,4 +1,4 @@
-package JavaBase.day08.ApiMath;
+package JavaBase.day07.ApiMath;
 
 /**
  * @author qilin

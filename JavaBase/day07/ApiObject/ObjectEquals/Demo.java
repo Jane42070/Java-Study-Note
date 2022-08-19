@@ -1,4 +1,4 @@
-package JavaBase.day08.ApiObject.ObjectEquals;
+package JavaBase.day07.ApiObject.ObjectEquals;
 
 public class Demo {
     public static void main(String[] args) {

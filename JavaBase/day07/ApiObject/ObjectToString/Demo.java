@@ -1,4 +1,4 @@
-package JavaBase.day08.ApiObject.ObjectToString;
+package JavaBase.day07.ApiObject.ObjectToString;
 
 public class Demo {
     public static void main(String[] args) {

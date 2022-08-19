@@ -1,4 +1,4 @@
-package JavaBase.day08.ApiObject.ObjectInterview;
+package JavaBase.day07.ApiObject.ObjectInterview;
 
 public class InterviewTest {
     public static void main(String[] args) {

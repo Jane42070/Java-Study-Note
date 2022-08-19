@@ -1,4 +1,4 @@
-package JavaBase.day08.ApiBigDecimal;
+package JavaBase.day07.ApiBigDecimal;
 
 import java.math.BigDecimal;
 

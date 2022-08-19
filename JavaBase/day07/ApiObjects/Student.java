@@ -1,4 +1,4 @@
-package JavaBase.day08.ApiObject.ObjectEquals;
+package JavaBase.day07.ApiObjects;
 
 import java.util.Objects;
 
@@ -32,6 +32,7 @@ public class Student {
 
     @Override
     public String toString() {
+        System.out.println("看看我执行了吗？");
         return "Student{" +
                 "name='" + name + '\'' +
                 ", age=" + age +
