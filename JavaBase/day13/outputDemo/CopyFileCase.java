@@ -1,0 +1,59 @@
+package JavaBase.day13.outputDemo;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Scanner;
+
+/**
+ * @author qilin
+ */
+public class CopyFileCase {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("输入复制的文件名：");
+        String filename = sc.nextLine();
+        FileInputStream fis = null;
+        FileOutputStream fos = null;
+        File file;
+        try {
+            fis = new FileInputStream("JavaBase/day13/outputDemo/" + filename);
+            String dup = "JavaBase/day13/outputDemo/" + filename + ".dup";
+            file = new File(dup);
+            if (file.exists()) {
+                boolean delete = file.delete();
+                System.out.println("检查到已备份文件，删除");
+            }
+            fos = new FileOutputStream(dup, true);
+            // 一个一个字节读写太慢了！
+            // int read = fis.read();
+            // System.out.println("正在复制...");
+            // while (read != -1) {
+                // fos.write(read);
+                // read = fis.read();
+            // }
+            // 创建字节数组批量读取批量写入
+            byte[] bytes = new byte[1024];
+            System.out.println("正在复制");
+            int read = fis.read(bytes);
+            while (read != -1) {
+                fos.write(bytes, 0, read);
+                read = fis.read(bytes);
+            }
+            System.out.println("复制成功");
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (fis != null && fos != null) {
+                try {
+                    System.out.println("关闭文件");
+                    fis.close();
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+}
