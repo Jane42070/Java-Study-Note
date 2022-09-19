@@ -5,6 +5,7 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/JavaWeb/day04-maven/maven-demo/pom.xml" />
+        <option value="$PROJECT_DIR$/JavaWeb/day05mybatis/mybatis-demo/pom.xml" />
       </list>
     </option>
   </component>
