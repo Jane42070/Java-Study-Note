@@ -4,6 +4,7 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.example.mapper.UserMapper;
 import org.example.pojo.User;
 
 import java.io.IOException;
@@ -27,8 +28,11 @@ public class MybatisDemo {
         // 2. 获取 SqlSession 对象，来执行 sql
         SqlSession sqlSession = sqlSessionFactory.openSession();
 
+        // 2.1 获取 UserMapper
+        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+
         // 3. 执行 sql
-        List<User> users = sqlSession.selectList("test.selectAll");
+        List<User> users = mapper.selectAll();
 
         System.out.println(users);
 

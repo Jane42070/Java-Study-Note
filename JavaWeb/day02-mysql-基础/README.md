@@ -237,7 +237,7 @@ select * from emp, dept order by emp.dep_id = dept.id;
 - 基本语法
 ```sql
 -- 隐式内连接
-select 字段列表 from 表1,表2... where 条件;
+select 字段列表 from 表1, 表2... where 条件;
 
 select * from emp, dept order by emp.dep_id = dept.id;
 -- 显示部分数据

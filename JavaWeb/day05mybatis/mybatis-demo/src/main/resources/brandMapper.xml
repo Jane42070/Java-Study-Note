@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--名称空间-->
+<!-- 数据库表的名称和实体类的属性名称不一样，则不能自动封装数据
+    * 起别名：对不一样的属性起别名，让别名和实体类的属性名一样
+        * 缺点：每次查询都要定义一次别名
+            * sql 片段
+                * 缺点：不灵活
+    * resultMap
+        * id 唯一标识
+        * type 映射类型，支持别名
+-->
+<!--定义一个 sql 片段-->
+<mapper namespace="org.example.mapper.BrandMapper">
+    <resultMap id="BrandResultMap" type="org.example.pojo.Brand">
+        <!--    id：完成主键方面的映射， result：完成一般字段的映射    -->
+        <result column="brand_name" property="brandName"/>
+        <result column="company_name" property="companyName"/>
+    </resultMap>
+    <insert id="add" useGeneratedKeys="true" keyProperty="id">
+        insert into tb_brand (brand_name, company_name, ordered, description, status)
+        values (#{brandName}, #{companyName}, #{ordered}, #{description}, #{status})
+    </insert>
+    <update id="updateBrand">
+        update tb_brand
+        <set>
+            <if test="brandName != null and brandName!= '' ">
+                brand_name = #{brandName},
+            </if>
+            <if test="companyName != null and companyName != '' ">
+                company_name = #{companyName},
+            </if>
+            <if test="ordered != null">
+                ordered = #{ordered},
+            </if>
+            <if test="description != null and description != '' ">
+                description = #{description},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+        </set>
+        where id = #{id};
+    </update>
+    <delete id="deleteById">
+        delete
+        from tb_brand
+        where id = #{id}
+    </delete>
+    <delete id="deleteByIds">
+        delete from tb_brand
+        where id in
+        <foreach collection="ids" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
+    <!--    <update id="updateBrand">-->
+    <!--        update tb_brand-->
+    <!--        set brand_name   = #{brandName},-->
+    <!--            company_name = #{companyName},-->
+    <!--            ordered      = #{ordered},-->
+    <!--            description  = #{description},-->
+    <!--            status       = #{status}-->
+    <!--        where id = #{id};-->
+    <!--    </update>-->
+    <select id="selectAll" resultMap="BrandResultMap">
+        select *
+        from tb_brand;
+    </select>
+    <!--
+        * 参数占位符：
+        #{} 会将其替换为 ？，为了防止 SQL 注入
+        ${} 拼 sql，会存在 SQL 注入问题
+        * 参数类型：parameterType：可以省略
+        * 特殊字符
+            CDATA 区
+            转义字符：
+                &lt;
+      -->
+    <select id="getBrandById" resultMap="BrandResultMap">
+        select *
+        from tb_brand
+        where id &lt; #{id};
+    </select>
+    <resultMap id="conditionMap" type="org.example.pojo.Brand">
+        <result column="company_name" property="companyName"/>
+        <result column="brand_name" property="brandName"/>
+    </resultMap>
+    <!--  动态条件查询
+    * 用户填写对应查询条件时不会每一个都填写，SQL 语句要根据用户输入的条件不同产生变化，就是动态SQL
+    * if 和 where
+    * if 条件判断
+        * test：逻辑表达式
+    * 问题
+        * 第一个条件不存在，后面会因为 and 连接语法错误
+        * 解决
+            * 用恒等式过渡：where 后加入 1=1 恒等式 后面跟 and
+            * <where> 标签替换 where 关键字：自动删减 and 语法
+      -->
+    <select id="getBrandByCondition" resultMap="conditionMap">
+        select *
+        from tb_brand
+        /* where 1=1 */
+        <where>
+            <if test="status != null">
+                status = #{status}
+            </if>
+            <if test="companyName != null and companyName != '' ">
+                company_name like #{companyName}
+            </if>
+            <if test="brandName != null and brandName != '' ">
+                brand_name like #{brandName}
+            </if>
+        </where>
+    </select>
+    <select id="getBrandByConditionSingle" resultMap="BrandResultMap">
+        select *
+        from tb_brand
+        -- 保底方案：otherwise，以防止用户一个都没有写
+        <where>
+            -- 相当于 switch
+            <choose>
+                <when test="status != null">
+                    status = #{status}
+                </when>
+                <when test="companyName != null and companyName != '' ">
+                    company_name like #{companyName}
+                </when>
+                <when test="brandName != null and brandName != '' ">
+                    brand_name like #{brandName}
+                </when>
+                <otherwise>
+                    1=1
+                </otherwise>
+            </choose>
+        </where>
+    </select>
+    <!--    <select id="getBrandByCondition" resultMap="conditionMap">-->
+    <!--        select *-->
+    <!--        from tb_brand-->
+    <!--        where company_name like #{companyName}-->
+    <!--          and brand_name like #{brandName}-->
+    <!--          and status = #{status};-->
+    <!--    </select>-->
+    <!--    <sql id="brand_column">-->
+    <!--        id-->
+    <!--        , brand_name as brandName, company_name as companyName, ordered, description, status-->
+    <!--    </sql>-->
+    <!--    <select id="selectAll" resultType="org.example.pojo.Brand">-->
+    <!--        select-->
+    <!--        <include refid="brand_column"/>-->
+    <!--        from tb_brand;-->
+    <!--    </select>-->
+</mapper>
