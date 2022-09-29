@@ -13,7 +13,7 @@ import java.io.IOException;
  * @author qilin
  */
 
-@WebServlet(urlPatterns = "/demo2", loadOnStartup = 1)
+@WebServlet(urlPatterns = "/demo3", loadOnStartup = 1)
 public class ServletDemo3 implements Servlet {
     private ServletConfig config;
 
